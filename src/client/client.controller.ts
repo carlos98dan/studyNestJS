@@ -1,4 +1,14 @@
-import { Controller, Delete, Get, Patch, Post, Put } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  Patch,
+  Post,
+  Put,
+  Query,
+} from '@nestjs/common';
 import { ClientService } from './client.service';
 
 @Controller('client')
@@ -6,18 +16,19 @@ export class ClientController {
   constructor(private clientService: ClientService) {}
 
   @Get()
-  index() {
+  index(@Query('limit') limit: any) {
+    console.log(limit);
     return this.clientService.getAll();
   }
 
-  @Get()
-  find() {
-    return this.clientService.get();
+  @Get('/:id')
+  find(@Param('id') id: string) {
+    return this.clientService.get(parseInt(id));
   }
 
   @Post()
-  store() {
-    return this.clientService.store();
+  store(@Body() client: any) {
+    return this.clientService.store(client);
   }
 
   @Put()

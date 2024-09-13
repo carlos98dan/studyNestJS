@@ -2,31 +2,22 @@ import { Injectable } from '@nestjs/common';
 
 @Injectable()
 export class ClientService {
-  private clients = [
-    {
-      id: 1,
-      name: 'Carolina',
-    },
-    {
-      id: 2,
-      name: 'Daniela',
-    },
-    {
-      id: 3,
-      name: 'Andres',
-    },
-  ];
+  private clients = [];
 
   getAll() {
     return this.clients;
   }
 
-  get() {
-    return this.clients;
+  get(id: number) {
+    return this.clients.filter((item) => item.id === id);
   }
 
-  store() {
-    return 'Creando Cliente';
+  store(client: any) {
+    this.clients.push({
+      id: this.clients.length + 1,
+      ...client,
+    });
+    return client;
   }
 
   update() {
