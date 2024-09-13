@@ -1,17 +1,12 @@
 import { Controller, Get } from '@nestjs/common';
+import { ProductService } from './product.service';
 
 @Controller('product')
 export class ProductController {
+  constructor(private productService: ProductService) {}
+
   @Get()
   index() {
-    return 'Pagina Inicial Productos';
-  }
-
-  @Get('/all')
-  getAllProducts() {
-    // Buscar en db
-    // Peticion a otro backend o api
-
-    return 'Obteniendo todos los productos';
+    return this.productService.getProducts();
   }
 }
