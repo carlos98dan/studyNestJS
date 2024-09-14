@@ -1,4 +1,10 @@
-import { Controller, Get, Param, ParseIntPipe } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Param,
+  ParseBoolPipe,
+  ParseIntPipe,
+} from '@nestjs/common';
 
 @Controller('sale')
 export class SaleController {
@@ -10,5 +16,10 @@ export class SaleController {
   @Get('/ticket/:num')
   getNumber(@Param('num', ParseIntPipe) num: number) {
     return num + 14;
+  }
+
+  @Get('/active/:status')
+  isProductActive(@Param('status', ParseBoolPipe) status: boolean) {
+    return status;
   }
 }
