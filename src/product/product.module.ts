@@ -15,9 +15,15 @@ import { LoggerMiddleware } from './middlewares/logger.middleware';
 export class ProductModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {
     // consumer.apply(LoggerMiddleware).forRoutes('product');
-    consumer.apply(LoggerMiddleware).forRoutes({
-      path: '/product',
-      method: RequestMethod.GET,
-    });
+    consumer.apply(LoggerMiddleware).forRoutes(
+      {
+        path: '/product',
+        method: RequestMethod.GET,
+      },
+      {
+        path: '/product',
+        method: RequestMethod.POST,
+      },
+    );
   }
 }
