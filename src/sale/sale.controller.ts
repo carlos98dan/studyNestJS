@@ -5,8 +5,10 @@ import {
   ParseBoolPipe,
   ParseIntPipe,
   Query,
+  UseGuards,
 } from '@nestjs/common';
 import { ValidateUserPipe } from './pipes/validate-user/validate-user.pipe';
+import { AuthGuard } from './guards/auth/auth.guard';
 
 @Controller('sale')
 export class SaleController {
@@ -16,6 +18,7 @@ export class SaleController {
   }
 
   @Get('/ticket/:num')
+  @UseGuards(AuthGuard)
   getNumber(@Param('num', ParseIntPipe) num: number) {
     return num + 14;
   }
@@ -26,6 +29,7 @@ export class SaleController {
   }
 
   @Get('/greet')
+  @UseGuards(AuthGuard)
   greet(@Query(ValidateUserPipe) query: { name: string; age: number }) {
     return `Hello ${query.name}, you are ${query.age + 30} years old`;
   }
