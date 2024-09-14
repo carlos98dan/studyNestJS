@@ -8,8 +8,12 @@ import {
   Post,
   Put,
   Query,
+  UsePipes,
+  ValidationPipe,
 } from '@nestjs/common';
 import { ClientService } from './client.service';
+import { CreateClientDto } from './dto/create-client.dto';
+import { UpdateClientDto } from './dto/update-client.dto';
 
 @Controller('client')
 export class ClientController {
@@ -27,13 +31,14 @@ export class ClientController {
   }
 
   @Post()
-  store(@Body() client: any) {
+  @UsePipes(new ValidationPipe())
+  store(@Body() client: CreateClientDto) {
     return this.clientService.store(client);
   }
 
   @Put()
-  update() {
-    return this.clientService.update();
+  update(@Body() client: UpdateClientDto) {
+    return this.clientService.update(client);
   }
 
   @Delete()

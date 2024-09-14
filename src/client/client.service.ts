@@ -1,4 +1,6 @@
 import { Injectable } from '@nestjs/common';
+import { CreateClientDto } from './dto/create-client.dto';
+import { UpdateClientDto } from './dto/update-client.dto';
 
 @Injectable()
 export class ClientService {
@@ -12,7 +14,7 @@ export class ClientService {
     return this.clients.filter((item) => item.id === id);
   }
 
-  store(client: any) {
+  store(client: CreateClientDto) {
     this.clients.push({
       id: this.clients.length + 1,
       ...client,
@@ -20,7 +22,7 @@ export class ClientService {
     return client;
   }
 
-  update() {
+  update(client: UpdateClientDto) {
     return 'Actualizando Cliente';
   }
 
