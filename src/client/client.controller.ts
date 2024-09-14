@@ -31,7 +31,11 @@ export class ClientController {
   }
 
   @Post()
-  @UsePipes(new ValidationPipe())
+  @UsePipes(
+    new ValidationPipe({
+      whitelist: true, // para que limpie los datos y quite los sub indices que no esten en el DTO
+    }),
+  )
   store(@Body() client: CreateClientDto) {
     return this.clientService.store(client);
   }
