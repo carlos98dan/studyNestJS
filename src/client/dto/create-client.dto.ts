@@ -15,8 +15,4 @@ export class CreateClientDto {
   @IsString()
   @IsNotEmpty()
   email: string;
-
-  @IsBoolean()
-  @IsNotEmpty()
-  status: boolean;
 }

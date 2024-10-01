@@ -46,7 +46,7 @@ export class ClientController {
 
   @Get('/:id')
   find(@Param('id') id: string) {
-    return this.clientService.get(parseInt(id));
+    return this.clientService.get(id);
   }
 
   @Post()
