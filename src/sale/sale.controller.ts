@@ -9,8 +9,10 @@ import {
 } from '@nestjs/common';
 import { ValidateUserPipe } from './pipes/validate-user/validate-user.pipe';
 import { AuthGuard } from './guards/auth/auth.guard';
+import { ApiTags } from '@nestjs/swagger';
 
 @Controller('sale')
+@ApiTags('Sale')
 export class SaleController {
   @Get()
   index() {

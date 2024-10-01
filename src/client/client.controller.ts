@@ -15,8 +15,10 @@ import {
 import { ClientService } from './client.service';
 import { CreateClientDto } from './dto/create-client.dto';
 import { UpdateClientDto } from './dto/update-client.dto';
+import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 
 @Controller('client')
+@ApiTags('Client')
 export class ClientController {
   constructor(private clientService: ClientService) {}
 
@@ -39,8 +41,16 @@ export class ClientController {
   }
 
   @Get()
+  @ApiOperation({ summary: 'Get All Clients' })
+  @ApiResponse({
+    status: 200,
+    description: 'Successful petition and return all clients',
+  })
+  @ApiResponse({
+    status: 403,
+    description: 'Forbidden',
+  })
   index(@Query('limit') limit: any) {
-    console.log(limit);
     return this.clientService.getAll();
   }
 
